@@ -1,12 +1,14 @@
-import { BiHomeCircle, BiHash, BiUser } from 'react-icons/bi';
+import Link from 'next/link';
+import { BiHomeCircle, BiUser } from 'react-icons/bi';
 import {
 	BsBell,
-	BsTwitter,
-	BsThreeDots,
 	BsBookmark,
+	BsTwitter,
 	BsEnvelope,
+	BsThreeDots,
 } from 'react-icons/bs';
-import Link from 'next/link';
+import { HiOutlineHashtag } from 'react-icons/hi';
+import { HiEnvelope } from 'react-icons/hi2';
 
 const NAVIGATION_ITEMS = [
 	{
@@ -19,7 +21,7 @@ const NAVIGATION_ITEMS = [
 	},
 	{
 		title: 'Explore',
-		icon: BiHash,
+		icon: HiOutlineHashtag,
 	},
 	{
 		title: 'Notifications',
@@ -39,15 +41,19 @@ const NAVIGATION_ITEMS = [
 	},
 ];
 
-const LeftSideBar = () => {
+const LeftSidebar = () => {
 	return (
 		<section className='w-[23%] sticky top-0 xl:flex flex-col items-stretch h-screen hidden'>
 			<div className='flex flex-col items-stretch h-full space-y-4 mt-4'>
 				{NAVIGATION_ITEMS.map((item) => (
 					<Link
 						className='hover:bg-white/10 text-2xl transition duration-200 flex items-center justify-start w-fit space-x-4 rounded-3xl py-2 px-6'
+						href={
+							item.title.toLocaleLowerCase() === 'home'
+								? '/'
+								: `/${item.title.toLowerCase()}`
+						}
 						key={item.title}
-						href={`/${item.title.toLowerCase()}`}
 					>
 						<div>
 							<item.icon />
@@ -75,4 +81,4 @@ const LeftSideBar = () => {
 	);
 };
 
-export default LeftSideBar;
+export default LeftSidebar;
